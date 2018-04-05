@@ -133,7 +133,14 @@ app.controller('NavigationController', ['$http', '$scope', '$location', '$mdDial
 }]);
 
 app.controller('HomeController', ['$http', '$route', '$scope', '$location', '$mdDialog', '$mdToast', function($http, $route, $scope, $location, $mdDialog, $mdToast) {
-  this.test = 'beano vinto'
+  this.tabs = [
+    'start','contact', 'jars', 'glass'
+  ]
+  this.partials = {};
+  for (let t of this.tabs) {
+    this.partials[t] = `partials/${t}.html`;
+  }
+
 }]);
 
 app.config(['$routeProvider','$locationProvider', '$mdThemingProvider', function($routeProvider,$locationProvider) { //, $mdThemingProvider

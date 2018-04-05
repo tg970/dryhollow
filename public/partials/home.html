@@ -1,1 +1,10 @@
-<h1>hola, {{ctrl.test}}</h1>
+<md-tabs class="tab" md-selected="ctrl.selectedIndex" md-align-tabs="top" flex>
+  <md-tab ng-repeat="tab in ctrl.tabs" id="tab{{tab}}">
+    <md-tab-label>{{tab}}</md-tab-label>
+    <md-tab-body layout="column" flex>
+      <div class="" ng-include="ctrl.partials[tab]">
+
+      </div>
+    </md-tab-body>
+  </md-tab>
+</md-tabs>
