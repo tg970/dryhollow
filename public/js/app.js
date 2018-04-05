@@ -134,12 +134,15 @@ app.controller('NavigationController', ['$http', '$scope', '$location', '$mdDial
 
 app.controller('HomeController', ['$http', '$route', '$scope', '$location', '$mdDialog', '$mdToast', function($http, $route, $scope, $location, $mdDialog, $mdToast) {
   this.tabs = [
-    'start','contact', 'jars', 'glass'
+    'start','contact', 'jars', 'glass', 'grinders'
   ]
   this.partials = {};
   for (let t of this.tabs) {
     this.partials[t] = `partials/${t}.html`;
   }
+
+  this.grinders = grinders;
+  console.log(this.grinders);
 
 }]);
 

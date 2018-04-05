@@ -1,0 +1,25 @@
+<h1>grinders</h1>
+
+<form name="newForm">
+
+      <md-input-container class="md-block">
+        <label>Text</label>
+        <input ng-model="newInfo.text">
+        <div ng-messages="newInfo.text.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container class="md-block">
+        <label>Text</label>
+        <input ng-model="newInfo.models">
+        <div ng-messages="newInfo.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+
+      <div class="center">
+        <md-button ng-click="ctrl.push(newInfo)">Submit</md-button>
+      </div>
+
+    </form>
