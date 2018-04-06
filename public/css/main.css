@@ -6,3 +6,15 @@ form {
   width: 50%;
   height: 20em;
 }
+
+.tab {
+  /* background-color: gray; */
+  height: 100vh;
+  margin-left: 2em;
+  margin-top: 0em;
+}
+
+.start {
+  margin: 1em;
+  margin-top: 5em;
+}

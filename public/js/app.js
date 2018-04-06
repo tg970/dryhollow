@@ -141,8 +141,25 @@ app.controller('HomeController', ['$http', '$route', '$scope', '$location', '$md
     this.partials[t] = `partials/${t}.html`;
   }
 
+  this.next = () => {
+    console.log('yep');
+    this.selectedIndex++;
+  }
+
+  this.autoSelect = (obj, k, s) => {
+    console.log('autoSelect', $scope);
+    let keys = Object.keys(obj);
+    console.log(keys);
+    if (keys.length == 1) {
+      //this.newInfo[k] = obj[keys[0]];
+    }
+  }
+
+  this.submit = (newInfo) => {
+    console.log('sumbit:', newInfo);
+    this.info = newInfo;
+  }
   this.grinders = grinders;
-  console.log(this.grinders);
 
 }]);
 

@@ -1,4 +1,4 @@
-let grinders = [
+let raw = [
  {
    "Manufacturer": "Kraken",
    "Model": "Solid Color",
@@ -204,16 +204,35 @@ let grinders = [
  }
 ];
 
-let grinders = [ 'Kraken', 'Cali Crusher', 'Kannastör' ];
+let grinders = { };
+let failsafe = 100;
+let count = 0;
 
-for (let r of raw) {
-  if (grinders.indexOf(r.Manufacturer) < 0) {
-    grinders.push(r.Manufacturer);
-  } else {
-    if (grinders[grinders.indexOf(r.Manufacturer)].models) {
-
+while (raw.length > 0 && failsafe > 0) {
+  for (let i in raw) {
+    let r = raw[i]
+    if (grinders[r.Manufacturer] == undefined) {
+      grinders[r.Manufacturer] = {};
     }
-  };
+    if (grinders[r.Manufacturer][r.Model] == undefined) {
+      grinders[r.Manufacturer][r.Model] = {};
+    }
+    if (grinders[r.Manufacturer][r.Model][r.Type] == undefined) {
+      grinders[r.Manufacturer][r.Model][r.Type] = {};
+    }
+    if (grinders[r.Manufacturer][r.Model][r.Type][r.Size] == undefined) {
+      grinders[r.Manufacturer][r.Model][r.Type][r.Size] = [];
+    } else {
+      let colors = r.Color.split(", ")
+      grinders[r.Manufacturer][r.Model][r.Type][r.Size] = colors;
+      raw.splice(i, 1);
+    }
+    count++
+  }
+  failsafe--;
 }
 
-console.log(grinders);
+console.log('final:', grinders);
+console.log('raw:', raw);
+console.log('count:', count);
+console.log(failsafe);
