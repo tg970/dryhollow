@@ -3,165 +3,28 @@ const app = angular.module('dryhollow_App', ['ngRoute', 'ngMaterial', 'ngSanitiz
 
 let user = null;
 
-app.controller('NavigationController', ['$http', '$scope', '$location', '$mdDialog', '$mdToast',function($http, $scope, $location, $mdDialog, $mdToast) {
-  // this.user = user;
-  //
-  // this.logout = () => {
-  //   console.log('logout');
-  //   localStorage.clear('token');
-  //   location.reload();
-  // }
-  //
-  // this.openLogin = (ev) => {
-  //   $mdDialog.show({
-  //     locals: {dataToPass: {}},
-  //     controller: DialogController,
-  //     controllerAs: 'ctrl',
-  //     templateUrl: 'partials/login.html',
-  //     parent: angular.element(document.body),
-  //     targetEvent: ev,
-  //     clickOutsideToClose:true,
-  //   })
-  //   .then((newInfo) => {
-  //     $http({
-  //         method: 'POST',
-  //         url: `/user/login`,
-  //         data: { newInfo }
-  //       }).then(response => {
-  //         //console.log('response:', response);
-  //         //console.log('data:', response.data);
-  //         if (response.status == 200) {
-  //           console.log('succesful login');
-  //           // localStorage.setItem('token', JSON.stringify(response.data.token));
-  //           user = response.data.user
-  //           this.user = user;
-  //           this.user.logged = true;
-  //           //console.log(user);
-  //           setTimeout(() => {
-  //             $mdToast.show(
-  //               $mdToast.simple()
-  //                 .textContent(`   Hello,   ${user.first}!`)
-  //                 .position("bottom right" )
-  //                 .hideDelay(3000)
-  //             );
-  //           }, 1000);
-  //           $scope.$broadcast('updateAuth', { data: this.user })
-  //         } else {
-  //           return this.openLogin(ev)
-  //         }
-  //       }).catch((error) => {
-  //         console.log('login error:', error);
-  //         this.openLogin(ev)
-  //       }).catch(err => console.error('Catch', err))
-  //   }, function() {
-  //     console.log('cancel dialog');;
-  //   });
-  // }
-  //
-  // this.openRegister = (ev) => {
-  //   $mdDialog.show({
-  //     locals: {dataToPass: {}},
-  //     controller: DialogController,
-  //     controllerAs: 'ctrl',
-  //     templateUrl: 'partials/register.html',
-  //     parent: angular.element(document.body),
-  //     targetEvent: ev,
-  //     clickOutsideToClose:true,
-  //   })
-  //   .then((newInfo) => {
-  //     //console.log('register request:', newInfo);
-  //     $http({
-  //         method: 'POST',
-  //         url: `/user`,
-  //         data: { newInfo }
-  //       }).then(response => {
-  //         //console.log('register succesful:', response.data);
-  //         return this.openLogin(ev)
-  //       }, (error) => {
-  //         console.log('login error:', error);
-  //         this.openRegister(ev)
-  //       }).catch(err => console.error('Catch', err))
-  //   }, function() {
-  //     console.log('cancel dialog');;
-  //   });
-  // }
-  //
-  // this.autoLogin = () => {
-  //   $http({
-  //       method: 'POST',
-  //       url: `/user/login`,
-  //       data: { newInfo: { username: 'tg', password: 'tg' } }
-  //     }).then(response => {
-  //       //console.log('response:', response);
-  //       if (response.status == 200) {
-  //         console.log('succesful login');
-  //         // localStorage.setItem('token', JSON.stringify(response.data.token));
-  //         user = response.data.user
-  //         this.user = user;
-  //         this.user.logged = true;
-  //         //console.log(user);
-  //         setTimeout(() => {
-  //           $mdToast.show(
-  //             $mdToast.simple()
-  //               .textContent(`   Hello,   ${user.first}!`)
-  //               .position("bottom right" )
-  //               .hideDelay(3000)
-  //           );
-  //         }, 1000);
-  //         $scope.$broadcast('updateAuth', { data: this.user })
-  //       } else {
-  //         console.log('login error')
-  //       }
-  //     }).catch((error) => {
-  //       console.log('login error:', error);
-  //   }).catch(err => console.error('Catch', err))
-  // };
-  // if ($location.absUrl() == 'http://localhost:1122/') {
-  //   //this.autoLogin()
-  // }
-  //
-  // this.navLink = (path) => {
-  //   //console.log('navLink', path);
-  //   //this.toFrom = undefined;
-  //   if ($location.url() == path) {
-  //     $scope.$broadcast('navLink', { data: path });
-  //   } else {
-  //     $location.path(path);
-  //   };
-  // };
-
-}]);
-
-app.controller('HomeController', ['$http', '$route', '$scope', '$location', '$mdDialog', '$mdToast', function($http, $route, $scope, $location, $mdDialog, $mdToast) {
-  this.tabs = [
-    'start','contact', 'jars', 'glass', 'grinders'
-  ]
-  this.partials = {};
-  for (let t of this.tabs) {
-    this.partials[t] = `partials/${t}.html`;
-  }
-
-  this.next = () => {
-    console.log('yep');
-    this.selectedIndex++;
-  }
-
-  this.autoSelect = (obj, k, s) => {
-    console.log('autoSelect', $scope);
-    let keys = Object.keys(obj);
-    console.log(keys);
-    if (keys.length == 1) {
-      //this.newInfo[k] = obj[keys[0]];
+const validCard = (num) => {
+  let str = String(num)
+  let arr = str.split('').reverse()
+  let sum = 0
+  for (let i = 0; i < arr.length; i++) {
+    if (i % 2 != 0) {
+      tempNum = arr[i]*2;
+      if (tempNum > 9) {
+        sum += (tempNum-10+1)
+      } else {
+        sum += tempNum
+      }
+    } else {
+      sum += Number(arr[i])
     }
   }
+  return sum % 10 === 0
+};
 
-  this.submit = (newInfo) => {
-    console.log('sumbit:', newInfo);
-    this.info = newInfo;
-  }
-  this.grinders = grinders;
-
-}]);
+const getLen = (num) => {
+  return num.toString().length;
+}
 
 app.config(['$routeProvider','$locationProvider', '$mdThemingProvider', function($routeProvider,$locationProvider) { //, $mdThemingProvider
   $locationProvider.html5Mode({ enabled: true });

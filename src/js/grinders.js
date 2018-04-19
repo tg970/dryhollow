@@ -204,35 +204,35 @@ let raw = [
  }
 ];
 
-let grinders = { };
-let failsafe = 100;
-let count = 0;
+// let grinders = { };
+// let failsafe = 100;
+// let count = 0;
+//
+// while (raw.length > 0 && failsafe > 0) {
+//   for (let i in raw) {
+//     let r = raw[i]
+//     if (grinders[r.Manufacturer] == undefined) {
+//       grinders[r.Manufacturer] = {};
+//     }
+//     if (grinders[r.Manufacturer][r.Model] == undefined) {
+//       grinders[r.Manufacturer][r.Model] = {};
+//     }
+//     if (grinders[r.Manufacturer][r.Model][r.Type] == undefined) {
+//       grinders[r.Manufacturer][r.Model][r.Type] = {};
+//     }
+//     if (grinders[r.Manufacturer][r.Model][r.Type][r.Size] == undefined) {
+//       grinders[r.Manufacturer][r.Model][r.Type][r.Size] = [];
+//     } else {
+//       let colors = r.Color.split(", ")
+//       grinders[r.Manufacturer][r.Model][r.Type][r.Size] = colors;
+//       raw.splice(i, 1);
+//     }
+//     count++
+//   }
+//   failsafe--;
+// }
 
-while (raw.length > 0 && failsafe > 0) {
-  for (let i in raw) {
-    let r = raw[i]
-    if (grinders[r.Manufacturer] == undefined) {
-      grinders[r.Manufacturer] = {};
-    }
-    if (grinders[r.Manufacturer][r.Model] == undefined) {
-      grinders[r.Manufacturer][r.Model] = {};
-    }
-    if (grinders[r.Manufacturer][r.Model][r.Type] == undefined) {
-      grinders[r.Manufacturer][r.Model][r.Type] = {};
-    }
-    if (grinders[r.Manufacturer][r.Model][r.Type][r.Size] == undefined) {
-      grinders[r.Manufacturer][r.Model][r.Type][r.Size] = [];
-    } else {
-      let colors = r.Color.split(", ")
-      grinders[r.Manufacturer][r.Model][r.Type][r.Size] = colors;
-      raw.splice(i, 1);
-    }
-    count++
-  }
-  failsafe--;
-}
-
-console.log('final:', grinders);
-console.log('raw:', raw);
-console.log('count:', count);
-console.log(failsafe);
+// console.log('final:', grinders);
+// console.log('raw:', raw);
+// console.log('count:', count);
+// console.log(failsafe);

@@ -1,1 +1,79 @@
-<h1>contact</h1>
+<div class="contactWrap">
+  <h1>contact info</h1>
+  <form class="newForm" name="newForm">
+
+    <md-input-container class="md-block">
+      <label>First Name</label>
+      <input ng-model="newInfo.first" maxlength="50" required>
+      <div ng-messages="newInfo.name.$error">
+        <div ng-message="required">First Name is required</div>
+      </div>
+    </md-input-container>
+
+    <md-input-container class="md-block">
+      <label>Last Name</label>
+      <input ng-model="newInfo.last" maxlength="50" required>
+      <div ng-messages="newInfo.name.$error">
+        <div ng-message="required">Last Name is required</div>
+      </div>
+    </md-input-container>
+
+    <md-input-container class="md-block">
+      <label>Email</label>
+      <input type="email" name="email" ng-model="newInfo.email" required>
+      <div ng-messages="newInfo.email.$error">
+        <div ng-message="required">Email is not valid</div>
+      </div>
+    </md-input-container>
+
+
+    <md-input-container class="md-block" >
+      <label>Shipping Address</label>
+      <input ng-model="newInfo.address1" required>
+      <div ng-messages="newInfo.address1.$error">
+        <div ng-message="required">Shipping street address is required</div>
+      </div>
+    </md-input-container>
+
+    <md-input-container class="md-block" >
+      <label>Unit, Appartment # (optional)</label>
+      <input ng-model="newInfo.address2">
+      <div ng-messages="newInfo.address2.$error">
+        <div ng-message="required">Shipping street address is required</div>
+      </div>
+    </md-input-container>
+
+    <md-input-container class="md-block">
+      <label>City</label>
+      <input ng-model="newInfo.city" required>
+      <div ng-messages="newInfo.city.$error">
+        <div ng-message="required">Shipping street address is required</div>
+      </div>
+    </md-input-container>
+
+    <md-input-container class="md-block">
+        <label>State</label>
+        <md-select ng-model="newInfo.state" required>
+          <md-option value="{{CO}}">CO: Colorado</md-option>
+          <md-divider></md-divider>
+          <md-option ng-repeat="(x, y) in ctrl.states" value="{{x}}">{{x}}: {{y}}</md-option>
+        </md-select>
+        <div ng-messages="newInfo.state.$error">
+          <div ng-message="required">This is required.</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container class="md-block">
+        <label>Zip</label>
+        <input type="number" pattern="[0-9]{5}" ng-model="newInfo.zip" required>
+        <div ng-messages="newInfo.zip.$error">
+          <div ng-message="required">Zip is required</div>
+        </div>
+      </md-input-container>
+
+    <div class="center">
+      <md-button class="" ng-click="ctrl.back()">&lt; Back</md-button>
+      <md-button class="" type="submit" ng-click="ctrl.subContact(newInfo)">Next &gt;</md-button><!-- type="submit" -->
+    </div>
+  </form>
+</div>

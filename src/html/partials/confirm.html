@@ -1,0 +1,20 @@
+<div class="confrimWrap">
+  <h2>please take a moment to confrim your order</h2>
+  <p>
+    Name: <b>{{ctrl.order.contact.first}} {{ctrl.order.contact.last}} </b></br>
+    Address: <b>{{ctrl.order.contact.address1}} {{ctrl.order.contact.address2}} </b></br>
+    City, ST, ZIP: <b>{{ctrl.order.contact.city}}, {{ctrl.order.contact.state}} {{ctrl.order.contact.zip}} </b></br>
+  </p>
+  <p>
+    Cashe: <b>{{ctrl.order.cashe}}</b>
+  </p>
+  <p>
+    Credit card: <b>{{ctrl.validCard}}</b>
+  </p>
+  <div class="center">
+    <md-button class="order" ng-click="ctrl.submit(ctrl.order)">Submit Order</md-button>
+  </div>
+  <div class="" ng-if="ctrl.submitted">
+    {{ctrl.info}}
+  </div>
+</div>
