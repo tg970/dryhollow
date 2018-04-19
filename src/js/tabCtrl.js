@@ -50,6 +50,8 @@ app.controller('HomeController', ['$http', '$route', '$scope', '$location', '$md
       console.log('sub-next:', this.order);
       this.active['boxes'] = false;
       this.advance();
+    } else {
+      console.log('nope', newInfo);
     }
       //setTimeout(() => { this.advance(); }, 500);
     //} else {
