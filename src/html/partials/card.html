@@ -19,6 +19,22 @@
       </md-input-container>
 
       <md-input-container class="md-block">
+        <label>Exp. Month (##)</label>
+        <input type="number" pattern="[0-9]{2}" ng-model="cc.mo" required>
+        <div ng-messages="cc.zip.$error">
+          <div ng-message="required">Month is not valid</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container class="md-block">
+        <label>Exp. Year (##)</label>
+        <input type="number" pattern="[0-9]{2}" ng-model="cc.yr" required>
+        <div ng-messages="cc.zip.$error">
+          <div ng-message="required">Year code is not valid</div>
+        </div>
+      </md-input-container>
+
+      <md-input-container class="md-block">
         <label>CVV</label>
         <input type="number" pattern="[0-9]{3}" ng-model="cc.cvv" required>
         <div ng-messages="cc.cvv.$error">

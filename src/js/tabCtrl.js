@@ -1,6 +1,6 @@
 app.controller('HomeController', ['$http', '$route', '$scope', '$location', '$mdDialog', '$mdToast', function($http, $route, $scope, $location, $mdDialog, $mdToast) {
   this.tabs = [
-    'start','contact', 'boxes', 'card', 'confirm'
+    'start','contact','boxes', 'card','confirm'
   ]
   this.active = {
     'start': false,
@@ -36,40 +36,31 @@ app.controller('HomeController', ['$http', '$route', '$scope', '$location', '$md
 
   this.order = {}
 
-  if ($location.absUrl() == 'http://localhost:1122/') {
-    $scope.newInfo = {
-      address1: "42 Wallaby Way",
-      address2: "Unit B",
-      city: "Austin",
-      email: "t@g.com",
-      first: "Tyler",
-      last: "Goodman",
-      state: "TX",
-      zip: 78704
-    }
-    $scope.cc = {
-      number: 4465400347917041,
-      zip: 12345,
-      cvv: 123
-    }
-  }
-
   this.subContact = (newInfo) => {
-    //if (this.order.contact == undefined) {
+    if (
+      newInfo.first &&
+      newInfo.last &&
+      newInfo.email &&
+      newInfo.address1 &&
+      newInfo.city &&
+      newInfo.state &&
+      newInfo.zip
+    ) {
       this.order.contact = newInfo;
       console.log('sub-next:', this.order);
       this.active['boxes'] = false;
       this.advance();
+    }
       //setTimeout(() => { this.advance(); }, 500);
     //} else {
       //console.log('nope');
     //}
   }
 
-  this.subCashe = (cashe) => {
-    console.log(cashe);
-    if (cashe) {
-      this.order.cashe = cashe;
+  this.subCache = (cache) => {
+    console.log(cache);
+    if (cache) {
+      this.order.cache = cache;
       this.active['card'] = false;
       this.advance();
       // setTimeout(() => { this.advance(); }, 500);
@@ -78,7 +69,7 @@ app.controller('HomeController', ['$http', '$route', '$scope', '$location', '$md
 
   this.subCC = (cc) => {
     console.log(cc);
-    if (cc.zip && cc.cvv) {
+    if (cc.zip && cc.cvv && cc.mo && cc.yr) {
       console.log('valid bits');
       if (validCard(cc.number)) {
         this.order.cc = cc;
