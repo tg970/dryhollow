@@ -2,13 +2,21 @@ app.controller('HomeController', ['$http', '$route', '$scope', '$location', '$md
   this.tabs = [
     'start','contact', 'boxes', 'card', 'confirm'
   ]
+  this.active = {
+    'start': false,
+    'contact': false,
+    'boxes': true,
+    'card': true,
+    'confirm': true
+  }
   this.partials = {};
   for (let t of this.tabs) {
     this.partials[t] = `partials/${t}.html`;
   }
 
   this.next = () => {
-    console.log('back');
+    console.log('next');
+    this.active['contact'] = false;
     this.selectedIndex++;
   }
 
@@ -45,6 +53,7 @@ app.controller('HomeController', ['$http', '$route', '$scope', '$location', '$md
     //if (this.order.contact == undefined) {
       this.order.contact = newInfo;
       console.log('sub-next:', this.order);
+      this.active['boxes'] = false;
       this.selectedIndex++;
     //} else {
       //console.log('nope');
@@ -55,16 +64,18 @@ app.controller('HomeController', ['$http', '$route', '$scope', '$location', '$md
     console.log(cashe);
     if (cashe) {
       this.order.cashe = cashe;
+      this.active['card'] = false;
       this.selectedIndex++;
     }
   }
 
-   this.subCC = (cc) => {
+  this.subCC = (cc) => {
     console.log(cc);
     if (cc.zip && cc.cvv) {
       console.log('valid bits');
       if (validCard(cc.number)) {
         this.order.cc = cc;
+        this.active['confrim'] = false;
         this.selectedIndex++;
         this.validCard = 'Credit Card OK!'
       } else {

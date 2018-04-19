@@ -1,5 +1,5 @@
 <md-tabs class="tab" md-selected="ctrl.selectedIndex" md-align-tabs="top" layout-padding flex>
-  <md-tab ng-repeat="tab in ctrl.tabs" id="tab{{tab}}">
+  <md-tab ng-repeat="tab in ctrl.tabs" id="tab{{tab}}" ng-disabled="ctrl.active[tab]">
       <md-tab-label>{{tab}}</md-tab-label>
     <md-tab-body layout="column" flex>
       <div class="tabBody" ng-include="ctrl.partials[tab]">
