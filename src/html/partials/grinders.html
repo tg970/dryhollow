@@ -1,0 +1,78 @@
+<h1>grinders</h1>
+
+<form name="newForm">
+
+  <md-input-container class="md-block">
+    <label>Manufacturer</label>
+    <md-select name="type"
+
+      ng-model="newInfo.manufacturer"
+      aria-label="Choose Manufacturer"
+      required>
+      <md-option ng-repeat="(x, y) in ctrl.grinders" value="{{x}}">{{x}}</md-option>
+    </md-select>
+    <div ng-messages="newInfo.type.$error">
+      <div ng-message="required">This is required.</div>
+    </div>
+  </md-input-container>
+
+  <md-input-container class="md-block">
+    <label>Model</label>
+    <md-select name="type" ng-model="newInfo.model" ng-disabled="newInfo.manufacturer == undefined" md-on-close="ctrl.autoSelect(ctrl.grinders[newInfo.manufacturer][newInfo.model], 'type', $scope)" aria-label="Choose Model" required>
+      <md-option
+        ng-repeat="(x, y) in ctrl.grinders[newInfo.manufacturer]"
+
+        value="{{x}}">{{x}}</md-option>
+    </md-select>
+    <div ng-messages="newInfo.type.$error">
+      <div ng-message="required">This is required.</div>
+    </div>
+  </md-input-container>
+
+  <md-input-container class="md-block">
+    <label>Type</label>
+    <md-select name="type" ng-model="newInfo.type" ng-disabled="newInfo.model == undefined" aria-label="Choose Type" required>
+      <md-option
+      ng-repeat="(x, y) in ctrl.grinders[newInfo.manufacturer][newInfo.model]"
+      value="{{x}}">{{x}}</md-option>
+    </md-select>
+    <div ng-messages="newInfo.type.$error">
+      <div ng-message="required">This is required.</div>
+    </div>
+  </md-input-container>
+
+  <md-input-container class="md-block">
+    <label>Size</label>
+    <md-select name="type" ng-model="newInfo.size" ng-disabled="newInfo.type == undefined" aria-label="Choose Type" required>
+      <md-option
+        ng-repeat="(x, y) in ctrl.grinders[newInfo.manufacturer][newInfo.model][newInfo.type]"
+        value="{{x}}">{{x}}</md-option>
+    </md-select>
+    <div ng-messages="newInfo.type.$error">
+      <div ng-message="required">This is required.</div>
+    </div>
+  </md-input-container>
+
+  <md-input-container class="md-block">
+    <label>Color</label>
+    <md-select name="type" ng-model="newInfo.color" ng-disabled="newInfo.size == undefined" aria-label="Choose Type" required>
+      <md-option
+        ng-repeat="x in ctrl.grinders[newInfo.manufacturer][newInfo.model][newInfo.type][newInfo.size]"
+        value="{{x}}">{{x}}</md-option>
+    </md-select>
+    <div ng-messages="newInfo.type.$error">
+      <div ng-message="required">This is required.</div>
+    </div>
+  </md-input-container>
+
+  <div class="center">
+    <md-button ng-click="ctrl.submit(newInfo)">Submit</md-button>
+  </div>
+
+</form>
+
+<div class="" ng-if="ctrl.info">
+  <ul>
+    <li ng-repeat="(x, y) in ctrl.info">{{x}}: {{y}}</li>
+  </ul>
+</div>

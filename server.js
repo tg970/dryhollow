@@ -8,7 +8,7 @@ const app        = express();
 require('pretty-error').start();
 
 // CONFIG
-const PORT       = process.env.PORT || 1122;
+const PORT       = process.env.PORT || 3000;
 const mongoURI   = process.env.MONGODB_URI || 'mongodb://localhost/dryhollow'
 const secretSess = process.env.KICKASS || 'smokeweedeveryday'
 
@@ -29,13 +29,13 @@ mongoose.Promise = global.Promise;
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static('public'));
-app.use('/angular/angular', express.static('node_modules/angular'));
-app.use('/angular/angular-route', express.static('node_modules/angular-route'));
-app.use('/angular/angular-aria', express.static('node_modules/angular-aria'));
-app.use('/angular/angular-animate', express.static('node_modules/angular-animate'));
-app.use('/angular/angular-messages', express.static('node_modules/angular-messages'));
-app.use('/angular/angular-material', express.static('node_modules/angular-material'));
-app.use('/angular/angular-sanitize', express.static('node_modules/angular-sanitize'));
+// app.use('/angular/angular', express.static('node_modules/angular'));
+// app.use('/angular/angular-route', express.static('node_modules/angular-route'));
+// app.use('/angular/angular-aria', express.static('node_modules/angular-aria'));
+// app.use('/angular/angular-animate', express.static('node_modules/angular-animate'));
+// app.use('/angular/angular-messages', express.static('node_modules/angular-messages'));
+// app.use('/angular/angular-material', express.static('node_modules/angular-material'));
+// app.use('/angular/angular-sanitize', express.static('node_modules/angular-sanitize'));
 app.use(morgan('dev'));
 app.use(cors());
 app.use(session({

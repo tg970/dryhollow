@@ -1,0 +1,43 @@
+body {
+  /* background-color: green; */
+}
+
+* {
+  border: 1px solid green;
+}
+
+form {
+  width: 50%;
+  height: 20em;
+}
+
+.tab {
+  /* background-color: gray; */
+  height: 100vh;
+  margin-left: 2em;
+  margin-top: 0em;
+}
+
+.start {
+  margin: 1em;
+  margin-top: 5em;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+  width: 100%;
+}
+
+.center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.tabBody {
+  background-color: blue;
+}
