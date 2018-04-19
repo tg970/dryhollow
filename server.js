@@ -21,7 +21,7 @@ db.on( 'disconnected', () => console.log( 'Mongo Disconnected' ));
 mongoose.Promise = global.Promise;
 
 // Controllers
-// const infoObjectController = require( './controllers/infoObjectController' );
+const orderController = require( './controllers/orderController' );
 // const userController = require( './controllers/userController' );
 
 
@@ -44,7 +44,7 @@ app.use(session({
 	 saveUninitialized: false,
    cookie: { secure: true, maxAge: 604800000 }
 }));
-// app.use('/object', infoObjectController);
+app.use('/order', orderController);
 // app.use('/user', userController);
 
 

@@ -5,9 +5,9 @@ app.controller('HomeController', ['$http', '$route', '$scope', '$location', '$md
   this.active = {
     'start': false,
     'contact': false,
-    'boxes': true,
-    'card': true,
-    'confirm': true
+    'boxes': false,
+    'card': false,
+    'confirm': false
   }
   this.partials = {};
   for (let t of this.tabs) {
@@ -47,6 +47,11 @@ app.controller('HomeController', ['$http', '$route', '$scope', '$location', '$md
       state: "TX",
       zip: 78704
     }
+    $scope.cc = {
+      number: 4465400347917041,
+      zip: 12345,
+      cvv: 123
+    }
   }
 
   this.subContact = (newInfo) => {
@@ -54,7 +59,8 @@ app.controller('HomeController', ['$http', '$route', '$scope', '$location', '$md
       this.order.contact = newInfo;
       console.log('sub-next:', this.order);
       this.active['boxes'] = false;
-      this.selectedIndex++;
+      this.advance();
+      //setTimeout(() => { this.advance(); }, 500);
     //} else {
       //console.log('nope');
     //}
@@ -65,7 +71,8 @@ app.controller('HomeController', ['$http', '$route', '$scope', '$location', '$md
     if (cashe) {
       this.order.cashe = cashe;
       this.active['card'] = false;
-      this.selectedIndex++;
+      this.advance();
+      // setTimeout(() => { this.advance(); }, 500);
     }
   }
 
@@ -75,8 +82,9 @@ app.controller('HomeController', ['$http', '$route', '$scope', '$location', '$md
       console.log('valid bits');
       if (validCard(cc.number)) {
         this.order.cc = cc;
-        this.active['confrim'] = false;
-        this.selectedIndex++;
+        this.active['confirm'] = false;
+        this.advance();
+        // setTimeout(() => { this.advance(); }, 500);
         this.validCard = 'Credit Card OK!'
       } else {
         alert("The credit card you entered is not a valid card number...");
@@ -86,10 +94,21 @@ app.controller('HomeController', ['$http', '$route', '$scope', '$location', '$md
 
   this.submit = (newInfo) => {
     console.log('sumbit:', newInfo);
-    this.submitted = true;
-    this.info = newInfo;
-    alert('Nice Job!');
-    location.reload();
+    $http({
+      method: 'POST',
+      url: `/order`,
+      data: newInfo
+    }).then(response => {
+      console.log('succesful post', response.data);
+      this.submitted = true;
+      this.info = newInfo;
+      alert('Nice Job!');
+      location.reload();
+    }).catch((error) => {
+      console.log('error:', error);
+      alert('Something went wrong...')
+    }).catch(err => console.error('Catch', err))
+
   }
   //this.grinders = grinders;
 
@@ -156,5 +175,10 @@ app.controller('HomeController', ['$http', '$route', '$scope', '$location', '$md
   }
 
   //this.selectedIndex = 3;
+
+  this.advance = () => {
+    console.log('advance');
+    this.selectedIndex++;
+  }
 
 }]);
